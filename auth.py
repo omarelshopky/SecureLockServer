@@ -44,7 +44,7 @@ def signup_user():
         return jsonify({"msg": "Invalid JSON format"}), 400
 
     # verify JSON data
-    missing_data = verify_user_data(data, keys_to_verify=["username", "password", "email", "phone", "address"])
+    missing_data = verify_user_data(data, keys_to_verify=["username", "password", "phone", "address"])
     if len(missing_data) > 0:
         return jsonify({
             "msg": "Missing " + ", ".join(missing_data)
