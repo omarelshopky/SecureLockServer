@@ -70,7 +70,6 @@ def signup_user():
         public_id=str(uuid.uuid4()),
         username=data["username"], 
         password=hashed_password,
-        email=data["email"],
         phone=data["phone"],
         address=data["address"]
     )
