@@ -168,3 +168,15 @@ headers = {
     "error": "ratelimit exceeded"
 }
 ```
+
+## Debugging Endpoints
+
+> *reach them directly from browser*
+
+### /getLogs
+
+- Returns all logs datat stored in the database
+
+### /getUsers
+
+- Returns all users datat stored in the database
