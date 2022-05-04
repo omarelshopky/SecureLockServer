@@ -24,6 +24,7 @@ python-dotenv = "*"
 flask-limiter = "*"
 gunicorn = "*"
 waitress = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
