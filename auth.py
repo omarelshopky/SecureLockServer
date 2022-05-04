@@ -1,28 +1,16 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token
 from werkzeug.security import generate_password_hash, check_password_hash
+from data_verifier import verify_user_data
 from Models.user import User
 import uuid
+
 
 import sys, os
 sys.path.append(os.path.abspath(os.path.join('..')))
 from main import db
 
 auth = Blueprint('auth', __name__)
-
-
-def verify_user_data(data, keys_to_verify):
-    """verifies that a list of keys exist in the JSON data and :returns a list of missing keys"""
-    missing_kays = []
-
-    # verify JSON data
-    for key in keys_to_verify:
-        try:
-            data[key]
-        except KeyError:
-            missing_kays.append(key)
-
-    return missing_kays
 
 
 def check_password_strength(password):

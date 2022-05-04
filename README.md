@@ -1,23 +1,30 @@
 # Secure Lock Server
+
 An authentication system uses flask-jwt-extended for APIs used in the flatter app.
 
 <br>
 
-# Establish the app
+## Establish the app
+
 - Create a virtual environment with all required dependencies by running those commands
+
 ```sh
 pip install pipenv
 pipenv install
 ```
+
 - Set your environment variables in **.env** file
 - Then start the flask app by
+
 ```sh
 pipenv shell
 flask run
 ```
 
-# Update the Database
+## Update the Database
+
 - If you do any change in the database models run this code to update the schema
+
 ```py
 from main import db, app
 db.create_all(app=app)
@@ -25,12 +32,14 @@ db.create_all(app=app)
 
 <br>
 
-# Endpoints Usage
+## Endpoints Usage
 
-## /register
+### /register
+
 - Register a new user in the database
   
 **Request Body**
+
 ```json
 {
     "username"  : "USER_USERNAME",
@@ -42,7 +51,9 @@ db.create_all(app=app)
 ```
 
 **Response**
+
 - Registered Successfully
+
 ```json
 {
     "msg": "User registered successfully"
@@ -50,6 +61,7 @@ db.create_all(app=app)
 ```
 
 - User Exist in the Database
+
 ```json
 {
     "msg": "User already exists"
@@ -57,6 +69,7 @@ db.create_all(app=app)
 ```
 
 - Password less than 8 characters
+
 ```json
 {
     "msg": "Weak password"
@@ -64,17 +77,19 @@ db.create_all(app=app)
 ```
 
 - Exceed Ratelimit
+
 ```json
 {
     "error": "ratelimit exceeded"
 }
 ```
 
+### /login
 
-## /login
 - Login with a specific user already in the database
   
 **Request Body**
+
 ```json
 {
     "username" : "YOUR_USERNAME",
@@ -83,7 +98,9 @@ db.create_all(app=app)
 ```
 
 **Response**
+
 - Login Successfully
+
 ```json
 {
     "access_token": "YOUR_JWT_TOKEN"
@@ -91,6 +108,7 @@ db.create_all(app=app)
 ```
 
 - Wrong Credentials
+
 ```json
 {
     "msg": "Invalid username or password"
@@ -98,30 +116,53 @@ db.create_all(app=app)
 ```
 
 - Exceed Ratelimit
+
 ```json
 {
     "error": "ratelimit exceeded"
 }
 ```
 
+### /logUnlocking
 
-## /protected
-- Just a test for an endpoint need users authentication to access 
+- Log unlocking process done with specific client
   
 **Request Header**
+
 ```json
 headers = {
   "Authorization": "Bearer <JWT_TOKEN>"
 }
 ```
 
-**Response**
-- Authorized User
+**Request Body**
+
+```json
+{
+    "unlocking-method" : "HOW_CLIENT_UNLOCK"
+}
 ```
-Hello to the protected area, your public id is <YOUR_ID>
+
+**Response**
+
+- Authorized User to log his/her unlocking
+
+```json
+{
+    "msg": "Unlocking process logged successfully"
+}
+```
+
+- Token Error
+
+```json
+{
+    "msg": "There is an error with this token"
+}
 ```
 
 - Exceed Ratelimit
+
 ```json
 {
     "error": "ratelimit exceeded"
