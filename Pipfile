@@ -25,6 +25,7 @@ flask-limiter = "*"
 gunicorn = "*"
 waitress = "*"
 psycopg2-binary = "*"
+tabulate = "*"
 
 [dev-packages]
 

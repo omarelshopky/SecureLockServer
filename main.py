@@ -27,6 +27,12 @@ app.register_blueprint(auth_blueprint)
 from logger import logger as logger_blueprint
 app.register_blueprint(logger_blueprint)
 
+print(os.getenv("DEBUG"))
+if os.getenv("DEBUG") == "True":
+    from debugger import debugger as debugger_blueprint
+    app.register_blueprint(debugger_blueprint)
+
+
 # Configure Limiter
 limiter = Limiter(
     app,
